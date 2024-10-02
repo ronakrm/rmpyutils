@@ -1,6 +1,14 @@
 # rmpyutils
 A bunch of miscellaneous python utilities. All typical pronunciations current acceptable.
 
+## Setup/Install
+Some command like this:
+```
+rye add git+https://github.com/ronakrm/rmpyutils.git
+poetry add git+https://github.com/ronakrm/rmpyutils.git
+```
+
+# Use
 ## Anonymized Tracing
 If you ever wanted to more freely copy and paste outputs to the internet/LLMs/etc...
 ```python
