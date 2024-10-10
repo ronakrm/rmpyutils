@@ -12,7 +12,7 @@ poetry add git+https://github.com/ronakrm/rmpyutils.git
 ## Anonymized Tracing
 If you ever wanted to more freely copy and paste outputs to the internet/LLMs/etc...
 ```python
-import rmpyutils.anon
+import rmpyutils.loganon
 
 import matplotlib.pyplot as plt
 plt.figure('slkdjfs', 2)
