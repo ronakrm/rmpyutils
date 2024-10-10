@@ -1,6 +1,7 @@
-import sys
 import os
+import sys
 from typing import Optional
+
 
 class PathAnonymizingInterceptor:
     def __init__(self, original_stream, root_path: str):
@@ -15,10 +16,11 @@ class PathAnonymizingInterceptor:
         self.original_stream.flush()
 
     def anonymize_paths(self, string):
-        return string.replace(self.root_path, '[ANONYMIZED]')
+        return string.replace(self.root_path, "[ANONYMIZED]")
 
     def __getattr__(self, attr):
         return getattr(self.original_stream, attr)
+
 
 class PathAnonymizingLogger:
     _instance = None
@@ -42,23 +44,25 @@ class PathAnonymizingLogger:
         sys.stderr = cls._original_stderr
         cls._instance = None
 
+
 def anonymize_paths(string: str, root_path: Optional[str] = None) -> str:
     root = root_path or os.getcwd()
-    return string.replace(root, '[ANONYMIZED]')
+    return string.replace(root, "[ANONYMIZED]")
+
 
 def stop_interceptor():
     PathAnonymizingLogger.stop()
 
+
 # Initialize the logger
 _logger_instance = PathAnonymizingLogger()
+
 
 # Ensure the logger is initialized when the module is imported
 def __getattr__(name):
     global _logger_instance
-    if name == '_logger_instance':
+    if name == "_logger_instance":
         if _logger_instance is None:
             _logger_instance = PathAnonymizingLogger()
         return _logger_instance
     raise AttributeError(f"module '{__name__}' has no attribute '{name}'")
-
-
