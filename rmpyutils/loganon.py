@@ -16,7 +16,9 @@ class PathAnonymizingInterceptor:
         self.original_stream.flush()
 
     def anonymize_paths(self, string):
-        return string.replace(self.root_path, "[ANONYMIZED]")
+        string = string.replace(self.root_path, "[ANONYMIZED]")
+        string = string.replace(sys.prefix, "[ANONYMIZED]")
+        return string
 
     def __getattr__(self, attr):
         return getattr(self.original_stream, attr)
