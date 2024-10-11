@@ -8,6 +8,7 @@ authors = [
 dependencies = [
     "numpy>=2.1.1",
     "matplotlib>=3.9.2",
+    "seaborn>=0.13.2",
 ]
 readme = "README.md"
 requires-python = ">= 3.10"
@@ -19,7 +20,9 @@ build-backend = "hatchling.build"
 [tool.rye]
 managed = true
 dev-dependencies = [
+    "pyqt6>=6.7.1",
     "pytest>=8.3.3",
+    "pot>=0.9.4",
 ]
 
 [tool.hatch.metadata]
