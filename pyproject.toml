@@ -32,8 +32,8 @@ allow-direct-references = true
 packages = ["rmpyutils"]
 
 [project.scripts]
-rmpyutils_loganon_install = "rmpyutils.scripts.install_sitecustomize:install_sitecustomize"
-rmpyutils_loganon_uninstall = "rmpyutils.scripts.uninstall_sitecustomize:uninstall_sitecustomize"
+rmpyutils_loganon_install = "rmpyutils.scripts.install_loganon:install_sitecustomize"
+rmpyutils_loganon_uninstall = "rmpyutils.scripts.install_loganon:uninstall_sitecustomize"
 
 [tool.hatch.build.targets.sdist]
 include = [

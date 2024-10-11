@@ -61,7 +61,7 @@ def install_sitecustomize():
             print(f"Warning: Overwriting existing sitecustomize.py at {dest_path}")
 
     # Copy sitecustomize.py to the site-packages
-    source_path = "sitecustomize.py"
+    source_path = os.path.join(os.path.dirname(__file__), "sitecustomize.py")
     shutil.copy(source_path, dest_path)
 
     # Calculate and store the checksum
