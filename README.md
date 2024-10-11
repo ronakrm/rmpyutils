@@ -4,9 +4,19 @@ A bunch of miscellaneous python utilities. All typical pronunciations current ac
 ## Setup/Install
 Some command like this:
 ```
-rye add git+https://github.com/ronakrm/rmpyutils.git
+rye add rmpyutils --git https://github.com/ronakrm/rmpyutils.git
 poetry add git+https://github.com/ronakrm/rmpyutils.git
 ```
+
+### Auto-Anonymization
+If you use `rye`, you can run this to anonymize stdout and stderr without having to manually import `rmpyutils.loganon` all the time.
+```
+. .venv/bin/activate
+rmpyutils_loganon_install
+```
+To uninstall, run `rmpyutils_loganon_uninstall`.
+
+For some reason this doesn't work with `poetry`; it breaks something in the build process.
 
 # Use
 ## Anonymized Tracing
