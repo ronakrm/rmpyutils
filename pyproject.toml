@@ -30,3 +30,13 @@ allow-direct-references = true
 
 [tool.hatch.build.targets.wheel]
 packages = ["rmpyutils"]
+
+[tool.rye.scripts]
+rmpyutils_loganon_install_sitecustomize = "rmpyutils.scripts.install_sitecustomize:main"
+rmpyutils_loganon_uninstall_sitecustomize = "rmpyutils.scripts.uninstall_sitecustomize:main"
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/rmpyutils",
+    "/scripts",
+]
