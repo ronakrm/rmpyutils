@@ -33,7 +33,17 @@ def get_site_packages_dir():
         return site.getusersitepackages()
 
 
-def install_sitecustomize(force=False):
+def install_sitecustomize():
+    parser = argparse.ArgumentParser(description="Install sitecustomize.py")
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="Force installation even if sitecustomize.py already exists",
+    )
+    args = parser.parse_args()
+
+    force = args.force
+
     # Get the appropriate site-packages directory
     site_packages = get_site_packages_dir()
 
@@ -65,13 +75,36 @@ def install_sitecustomize(force=False):
     )
 
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Install sitecustomize.py")
-    parser.add_argument(
-        "--force",
-        action="store_true",
-        help="Force installation even if sitecustomize.py already exists",
-    )
-    args = parser.parse_args()
+def uninstall_sitecustomize():
+    site_packages = get_site_packages_dir()
 
-    install_sitecustomize(force=args.force)
+    sitecustomize_path = os.path.join(site_packages, "sitecustomize.py")
+    checksum_path = os.path.join(site_packages, "sitecustomize_checksum.txt")
+
+    if not os.path.exists(sitecustomize_path):
+        print("sitecustomize.py is not installed in this environment.")
+        return
+
+    if not os.path.exists(checksum_path):
+        print(
+            "Warning: Checksum file not found. Cannot verify sitecustomize.py integrity."
+        )
+        return
+
+    # Read the stored checksum
+    with open(checksum_path, "r") as f:
+        stored_checksum = f.read().strip()
+
+    # Calculate the current checksum
+    current_checksum = get_file_checksum(sitecustomize_path)
+
+    if current_checksum != stored_checksum:
+        print("Error: The sitecustomize.py file has been modified since installation.")
+        print("It may have been changed by another program or manually edited.")
+        print("Please check the file contents before removing it manually.")
+        return
+
+    # If checksums match, proceed with removal
+    os.remove(sitecustomize_path)
+    os.remove(checksum_path)
+    print(f"sitecustomize.py has been successfully uninstalled from {site_packages}.")
