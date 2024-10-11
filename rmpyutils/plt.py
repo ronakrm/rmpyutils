@@ -3,7 +3,7 @@ from typing import Optional
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
-import seaborn as sns
+import seaborn as sns  # type: ignore
 from matplotlib import animation
 
 myBlue = "#005baa"
